@@ -1,23 +1,56 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import axios from 'axios'
 
-export const LoginForm = () => {
-    const handleLoginSubmit = (e:any) => {
+interface FormData {
+    email: string
+    password: string
+}
+
+// "Content-type": "multipart/form-data"
+
+const apiClient = axios.create({
+    baseURL: "/api",
+    headers: {
+        "Content-type" : "application/json",
+    },
+})
+
+const loginRequest = async (FormData: FormData) => {
+    return apiClient
+    .post("/login", FormData)
+    .then((res) => res.data)
+    .catch((err) => {
+        throw err.response
+    })
+
+}
+
+export const LoginForm: React.FC = () => {
+    const [ formData, setFormData ] = useState<FormData>({
+        email: '',
+        password: ''
+    })
+
+
+    const handleLoginSubmit = async (e: any) => {
         e.preventDefault()
+        console.log(formData)
         console.log("Login attempt!")
+        const res: any = await loginRequest(formData);
+        console.log(res)
     }
 
-    const handleFormDataChange = (e:any) => {
-        console.log(e);
-        console.log("form data updated!!")
+    const handleFormDataChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFormData({...formData, [e.target.name]: e.target.value})
+        console.log(formData)
     }
 
     return (
         <form onSubmit={handleLoginSubmit}>
             <label>Email</label>
-            <input type="email" onChange={handleFormDataChange}/>
+            <input type="email" name="email" onChange={handleFormDataChange} value={formData.email}/>
             <label>Password</label>
-            <input type="password" onChange={handleFormDataChange}/>
+            <input type="password" name="password" onChange={handleFormDataChange} value={formData.password}/>
             <button>Login</button>
         </form>
     )

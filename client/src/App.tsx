@@ -6,7 +6,6 @@ import { LoginPage } from './pages/LoginPage'
 function App() {
   return (
     <>
-      <h1>HENLO FROM CLIENT APP</h1>
       <Routes>
         <Route path="/dummy" element={<Dummy />}/>
         <Route path="/" element={<LoginPage />}/>
