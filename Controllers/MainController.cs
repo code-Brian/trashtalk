@@ -25,7 +25,7 @@ public class MainController : ControllerBase
         testUser.LastName = "Appleseed";
         testUser.Email = "jappleseed@gmail.com";
         testUser.Password = "lolnoway";
-        await Task.Delay(1000);
+        await testUser;
         return testUser;
     }
 }

@@ -2,24 +2,33 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 export const Dummy = () => {
+    const [isLoaded, setIsLoaded] = useState(false)
+    const [pageLoadCount, setPageLoadCount] = useState(0)
     const [testData,setTestData] = useState({
-        FirstName: "",
-        LastName: "",
-        Email:"",
+        firstName: "",
+        lastName: "",
+        email:"",
     })
 
     useEffect(() => {
-        axios.get("/api/dummyData")
-        .then((res:any) => {setTestData(res.data)})
-        .catch((err:any) => console.log(err))
+        if(!isLoaded)
+        {
+            axios.get("/api/test")
+            .then((res:any) => {setTestData(res.data)})
+            .catch((err:any) => console.log(err))
+            setPageLoadCount(pageLoadCount+1)
+            setIsLoaded(true)
+        }
     }, [])
+
+
 
     return (
         <>
             <h1>Hello Reacc with data from .NET!</h1>
-            <p>{testData.FirstName}</p>
-            <p>{testData.LastName}</p>
-            <p>{testData.Email}</p>
+            <p>{testData.firstName}</p>
+            <p>{testData.lastName}</p>
+            <p>{testData.email}</p>
         </>
     )
 }

@@ -1,14 +1,15 @@
 import './App.css'
-import { Routes, Route, Link } from 'react-router-dom'
-import {Dummy} from './pages/Dummy'
+import { Routes, Route } from 'react-router-dom'
+import { Dummy } from './pages/Dummy'
+import { LoginPage } from './pages/LoginPage'
 
 function App() {
   return (
     <>
       <h1>HENLO FROM CLIENT APP</h1>
-      <Link to="/">Dummy</Link>
       <Routes>
-        <Route path="/" element={<Dummy />}/>
+        <Route path="/dummy" element={<Dummy />}/>
+        <Route path="/" element={<LoginPage />}/>
       </Routes>
     </>
   )
