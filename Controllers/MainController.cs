@@ -45,4 +45,24 @@ public class MainController : ControllerBase
         Console.WriteLine(testLoginUser.Password);
         return testLoginUser;
     }
+
+    [HttpPost("register")]
+    public async Task<ActionResult<User>> Register([FromBody] User newUser)
+    {
+        Dictionary<string, List<string>> errors = new Dictionary<string, List<string>>();
+        if(ModelState.IsValid)
+        {
+            await Task.Delay(10);
+            Console.WriteLine("User met all requirements!");
+            Console.WriteLine(newUser);
+            return newUser;
+        }
+        else
+        {
+            await Task.Delay(10);
+            Console.WriteLine("Invalid model state!");
+            return null;
+        }
+        return BadRequest(ModelState);
+    }
 }

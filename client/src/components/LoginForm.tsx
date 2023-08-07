@@ -47,10 +47,14 @@ export const LoginForm: React.FC = () => {
 
     return (
         <form onSubmit={handleLoginSubmit}>
-            <label>Email</label>
-            <input type="email" name="email" onChange={handleFormDataChange} value={formData.email}/>
-            <label>Password</label>
-            <input type="password" name="password" onChange={handleFormDataChange} value={formData.password}/>
+            <div>
+                <label className="mr-4">Email</label>
+                <input type="email" name="email" onChange={handleFormDataChange} value={formData.email}/>
+            </div>
+            <div>
+                <label>Password</label>
+                <input type="password" name="password" onChange={handleFormDataChange} value={formData.password}/>
+            </div>
             <button>Login</button>
         </form>
     )

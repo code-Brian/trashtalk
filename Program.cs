@@ -34,7 +34,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "client",
     pattern: "{*url}",
-    defaults: new {controller="Main",action="Index"}
+    defaults: new {controller="Public",action="Client"}
 );
 
 app.Run();
