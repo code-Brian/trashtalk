@@ -46,16 +46,16 @@ export const LoginForm: React.FC = () => {
     }
 
     return (
-        <form onSubmit={handleLoginSubmit}>
-            <div>
-                <label className="mr-4">Email</label>
-                <input type="email" name="email" onChange={handleFormDataChange} value={formData.email}/>
-            </div>
-            <div>
-                <label>Password</label>
-                <input type="password" name="password" onChange={handleFormDataChange} value={formData.password}/>
-            </div>
-            <button>Login</button>
-        </form>
+        <form onSubmit={handleLoginSubmit} className="grid grid-cols-5 grid-rows-5">
+        <div className="col-start-2 col-end-5 row-start-2 row-end-2 grid grid-cols-2 mb-3">
+            <label className="text-left font-bold">Email</label>
+            <input className="rounded px-3" type="email" name="email" onChange={handleFormDataChange} value={formData.email}/>
+        </div>
+        <div className="col-start-2 col-end-5 row-start-3 row-end-3 grid grid-cols-2 mb-3">
+            <label className="text-left font-bold">Password</label>
+            <input className="rounded px-3" type="password" name="password" onChange={handleFormDataChange} value={formData.password}/>
+        </div>
+        <button className="col-start-3 col-end-3 row-start-4 row-end-4 border border-slate-600 rounded shadow hover:bg-blue-300">Login</button>
+    </form>
     )
 }

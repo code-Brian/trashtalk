@@ -2,9 +2,11 @@ import { LoginForm } from '../components/LoginForm'
 
 export const LoginPage = () => {
     return (
-        <div className="bg-blue-950 text-blue-100 relative fixed top-0 right-0 z-40 text-xl gap-10 px-10 py-5 items-center font-oswald flex relative w-full z-10">
-            <h1>Login to talk trash!</h1>
-            <LoginForm/>
+        <div className="bg-emerald-200 w-screen h-screen grid grid-cols-5 grid-rows-5">
+            <div className="bg-emerald-300 col-start-3 col-end-3 row-start-2 row-end-2 flex flex-col justify-center items-center rounded shadow py-1">
+                <h1 className="font-bold mt-10">Login to talk trash!</h1>
+                <LoginForm/>
+            </div>
         </div>
     )
 }
