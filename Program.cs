@@ -1,10 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using TrashTalk.Models;
+using TrashTalk.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+// This gives our views direct access to session
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddSession();
 builder.Services.AddCors();
 

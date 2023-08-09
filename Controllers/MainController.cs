@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using TrashTalk.Models;
+using TrashTalk.Data;
 using TrashTalk.DTOs;
 
 namespace TrashTalk.Controllers;
@@ -49,19 +50,17 @@ public class MainController : ControllerBase
     [HttpPost("register")]
     public async Task<ActionResult<User>> Register([FromBody] User newUser)
     {
-        Dictionary<string, List<string>> errors = new Dictionary<string, List<string>>();
+        Dictionary<string, List<string>> errors = new Dictionary<string, List<string>>
+        {
+            {"Email", new List<string> {"Email already registered"}},
+            {"Password", new List<string>()}
+        };
         if(ModelState.IsValid)
         {
-            await Task.Delay(10);
-            Console.WriteLine("User met all requirements!");
-            Console.WriteLine(newUser);
+            _context.Add(newUser);
+            await _context.SaveChangesAsync();
+            // Console.WriteLine(newUser.FirstName);
             return newUser;
-        }
-        else
-        {
-            await Task.Delay(10);
-            Console.WriteLine("Invalid model state!");
-            return null;
         }
         return BadRequest(ModelState);
     }
