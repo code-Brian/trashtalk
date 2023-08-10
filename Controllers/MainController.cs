@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TrashTalk.Models;
 using TrashTalk.Data;
 using TrashTalk.DTOs;
@@ -63,5 +64,22 @@ public class MainController : ControllerBase
             return newUser;
         }
         return BadRequest(ModelState);
+    }
+
+    [HttpGet("user{userId}")]
+    public async Task<ActionResult<UserWithoutPasswordDto>> GetUserById(int userId)
+    {
+        // User? requestedUser = await _context.Users.FindAsync(id);
+        var searchUser = await _context.Users
+        .Where(u => u.UserId == userId)
+        .FirstOrDefaultAsync();
+
+        if(searchUser == null)
+        {
+            return null;
+        }
+
+        UserWithoutPasswordDto user = new UserWithoutPasswordDto(searchUser);
+        return user;
     }
 }
